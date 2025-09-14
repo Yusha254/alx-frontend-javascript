@@ -1,37 +1,23 @@
+// task_1/js/main.ts
+
+// Define the Teacher interface
 interface Teacher {
-  readonly firstName: string;    
-  readonly lastName: string;      
-  fullTimeEmployee: boolean;      
-  yearsOfExperience?: number; 
-  location: string;               
-  [key: string]: any;             
+  firstName: string;
+  lastName: string;
 }
 
-interface Director extends Teacher {
-  numberOfReports: number;
+// Define the function interface
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
 }
 
-function printTeacher({ firstName, lastName }: { firstName: string; lastName: string }): string {
-  return `${firstName.charAt(0)}. ${lastName}`;
-}
+// Implement the function
+const printTeacher: printTeacherFunction = function (
+  firstName: string,
+  lastName: string
+): string {
+  return `${firstName[0]}. ${lastName}`;
+};
 
-interface StudentClassInterface {
-  workOnHomework(): string;
-  displayName(): string;
-}
-
-interface StudentConstructor {
-  new (firstName: string, lastName: string): StudentClassInterface;
-}
-
-class StudentClass implements StudentClassInterface {
-  constructor(private firstName: string, private lastName: string) {}
-
-  workOnHomework(): string {
-    return "Currently working";
-  }
-
-  displayName(): string {
-    return this.firstName;
-  }
-}
+// Example usage
+console.log(printTeacher("John", "Doe")); // J. Doe
