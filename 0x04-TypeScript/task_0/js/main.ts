@@ -5,7 +5,7 @@ interface Student {
   location: string;
 }
 
-const student1: Student = {
+const student: Student = {
   firstName: "Joshua",
   lastName: "Kyalo",
   age: 24,
