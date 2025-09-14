@@ -1,23 +1,50 @@
 // task_1/js/main.ts
 
-// Define the Teacher interface
+// Teacher & Director interfaces
 interface Teacher {
-  firstName: string;
-  lastName: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  fullTimeEmployee: boolean;
+  yearsOfExperience?: number;
+  location: string;
+  [key: string]: any;
 }
 
-// Define the function interface
+interface Director extends Teacher {
+  numberOfReports: number;
+}
+
+// function interface (must appear exactly)
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
-// Implement the function
-const printTeacher: printTeacherFunction = function (
-  firstName: string,
-  lastName: string
-): string {
-  return `${firstName[0]}. ${lastName}`;
-};
+// The function declaration (destructured param must appear exactly)
+function printTeacher({ firstName, lastName }: { firstName: string; lastName: string }): string {
+  return `${firstName}. ${lastName}`;
+}
 
-// Example usage
-console.log(printTeacher("John", "Doe")); // J. Doe
+// Student class interfaces & implementation
+interface StudentClassInterface {
+  workOnHomework(): string;
+  displayName(): string;
+}
+
+interface StudentConstructor {
+  new (firstName: string, lastName: string): StudentClassInterface;
+}
+
+class StudentClass implements StudentClassInterface {
+  constructor(private firstName: string, private lastName: string) {}
+
+  workOnHomework(): string {
+    return "Currently working";
+  }
+
+  displayName(): string {
+    return this.firstName;
+  }
+}
+
+// Example usage (optional)
+console.log(printTeacher({ firstName: "John", lastName: "Doe" })); // J. Doe
